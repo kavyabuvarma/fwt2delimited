@@ -19,8 +19,8 @@ class ConfSpec:
             else:
                 raise ValueError("The number of columns do not match the number of offsets in the spec.")
 
-            if self.include_header is not bool:
-                logging.warning("Invalid value for the key 'IncludeHeader', expected one of [True, False]. "
+            if self.include_header not in ["True", "False"]:
+                logging.warning("Invalid value for the key 'IncludeHeader', expected one of [\"True\", \"False\"]. "
                                 "Setting 'Include Header' = True.")
                 self.include_header = True
         except AttributeError:
