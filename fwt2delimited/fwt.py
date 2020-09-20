@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import random
 import string
+import codecs
 
 
 def get_sample_values(filepath) -> str:
@@ -24,6 +25,34 @@ class Fwt:
     def __init__(self, spec):
         self.spec = spec
 
+    def get_records_fwt_file(self, fwt_file):
+        try:
+            encoding_format = self.spec.encoding_format_del
+            f = codecs.open(fwt_file, "r", encoding_format)
+            records = f.read().split("\n")
+        except TypeError:
+            logging.error("Error while reading FWT file.")
+            logging.exception("message")
+        else:
+            return records
+
+    def convert_records(self, records_fwt, delimiter):
+        try:
+            records_delimited = []
+            for record_fwt in records_fwt:
+                index_start = 0
+                values = []
+                for offset in self.spec.offsets_int:
+                    index_end = index_start + offset
+                    values.append(record_fwt[index_start: index_end].rstrip())
+                    index_start = index_end
+                records_delimited.append(delimiter.join(values))
+        except (IOError, ValueError, KeyError, LookupError):
+            logging.error("Error while converting fwt to delimited.")
+            logging.exception("message")
+        else:
+            return records_delimited
+
     def add_header_if_true(self):
         if self.spec.include_header == "True":
             fields_array = []
@@ -44,9 +73,11 @@ class Fwt:
                 for offset in self.spec.offsets_int:
                     values_array.append(str.ljust(generate_rand_value(), offset)[0:offset])
                 lines.append(''.join(values_array))
-        except Exception as e:
-            logging.error("Error generating FWT file with random data. %s", e.message)
-        return lines
+        except (IOError, ValueError, KeyError, LookupError):
+            logging.error("Error while generating FWT file with random data.")
+            logging.exception("message")
+        else:
+            return lines
 
     def generate_dataset_from_sample(self, num_of_records, sample_values_json_str) -> [str]:
         lines = []
@@ -66,12 +97,14 @@ class Fwt:
                         rand_values = [generate_rand_value(), generate_rand_value(), generate_rand_value()]
                     values_array.append(str.ljust(random.choice(rand_values), self.spec.spec_dict.get(key)))
                 lines.append(''.join(values_array))
-        except Exception as e:
-            logging.error("Error generating FWT file with sample dataset. %s", e.message)
-        return lines
+        except (IOError, ValueError, KeyError, LookupError):
+            logging.error("Error while generating FWT file with sample dataset.")
+            logging.exception("message")
+        else:
+            return lines
 
     def generate_fwt_file(self, random_data=True, num_of_records: int = 20, file_path: str = "data/fwt.txt",
-                          sample_values_json_str: str = get_sample_values("")) -> int:
+                          sample_values_json_str: str = get_sample_values("")) -> str:
         try:
             if random_data is True:
                 lines = self.generate_rand_dataset(num_of_records)
@@ -80,6 +113,20 @@ class Fwt:
 
             fwt_file = open(file_path, "w", encoding=self.spec.encoding_format_fwt)
             fwt_file.write('\n'.join(lines))
-        except Exception as e:
-            logging.error("Error generating FWT file %s", e.message)
+        except (IOError, ValueError, KeyError, LookupError):
+            logging.error("Error while generating FWT file.")
+            logging.exception("message")
+        else:
+            return fwt_file.name
+
+    def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "data/delimited.csv") -> int:
+        try:
+            records_fwt = self.get_records_fwt_file(fwt_file)
+            records_delimited = self.convert_records(records_fwt, delimiter)
+
+            delimited_file = open(delimited_file, "w", encoding=self.spec.encoding_format_del)
+            delimited_file.write('\n'.join(records_delimited))
+        except (IOError, ValueError, KeyError, LookupError):
+            logging.error("Error while generating delimited file.")
+            logging.exception("message")
         return 0
