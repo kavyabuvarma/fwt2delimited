@@ -1,5 +1,5 @@
 f1   f2          f3 f4f5           f6     f7        f8           f9                  f10          
-WORK SYDNEY      AUDL NEUTRAL      INVALIDNSW       46282.67     AUSTRALIA           BLAH         
-WALK HOBART      AUDNASAD          TWO    WA        25.67        AUSTRALIA           ßÌ         
-WORK PERTH       INRO NEUTRAL      ONE    VICTORIA  3925935.12   UNITED ARAB EMIRATESNOT SPECIFIED
-SLEEPHOBART      GBPF NEUTRAL      FIVE   VICTORIA  0.0          PHILIPPINES         NOT SPECIFIED
+SLEEPPERTH       INRF NOT SPECIFIEDTHREE  WA        0.0          INDIA               BLAH         
+WORK MELBOURNE   USDO SAD          TWO    WA        3925935.12   AUSTRALIA           NOT SPECIFIED
+WORK PERTH       X  NAHAPPY        TWO    NSW       25.67        AUSTRALIA           BLAH         
+WALK MELBOURNE   USDNASAD          FOUR   ACT       25.67        NEW ZEALAND         ËÄS TU     

@@ -38,7 +38,7 @@ class TestFwt:
 
         fwt = Fwt(spec)
 
-        sample_val_json = fwt_utils.get_sample_values("../data/sample_values.json")
+        sample_val_json = fwt_utils.get_sample_values("../fwt2delimited/data/sample_values.json")
         filepath = Path(__file__).parent / "data/sample_data_fwt.txt"
 
         fwt_file = fwt.generate_fwt_file(num_of_records=records, file_path=str(filepath),
@@ -84,13 +84,25 @@ class TestFwt:
         for i in range(0, records):
             assert del_content[i].replace(' ', '').replace(',', ''), fwt_content[i].replace(' ', '')
 
-    def test_convert_invalid(self):
-        filename = str("thisfiledoesntexist.txt")
+    def test_convert_invalid_file_doesnt_exist(self):
+        filename = str("this_file_doesnt_exist.txt")
 
         f = open("data/spec_valid.json")
         spec = conf_spec.ConfSpec(f)
         f.close()
 
         fwt = Fwt(spec)
-        delim_file = fwt.fwt_to_delimited(f)
-        assert delim_file is None, True
+        delimited_file = fwt.fwt_to_delimited(filename)
+        assert delimited_file is None, True
+
+    def test_convert_fwt_additional_columns(self):
+        # should ignore extra data
+        pass
+
+    def test_convert_fwt_less_columns(self):
+        # should add empty string to columns
+        pass
+
+    def test_empty_fwt(self):
+        # should generate empty csv
+        pass

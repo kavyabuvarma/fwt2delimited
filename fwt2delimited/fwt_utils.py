@@ -8,7 +8,7 @@ import codecs
 
 def get_sample_values(filepath) -> str:
     if filepath == "":
-        filepath = "../data/sample_values.json"
+        filepath = "data/sample_values.json"
     path = Path(__file__).parent / filepath
     with path.open() as f:
         f = open(path)
