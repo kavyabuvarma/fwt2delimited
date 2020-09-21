@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="fwt2delimted",
+    name="fwt2delimited",
     version="1.0.0",
     author="Kavya Varma",
     author_email="kavyabu@gmail.com",
@@ -21,5 +21,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: MIT License",
-    ]
+    ],
+    include_package_data=True,
+    package_data={'': ['data/*']},
 )

@@ -40,3 +40,7 @@ class TestConfSpec:
         assert spec.include_header != "", True
         assert spec.encoding_format_fwt != "", True
         assert spec.encoding_format_del != "", True
+
+    def test_default_spec(self):
+        #should return default spec from data folder
+        pass
