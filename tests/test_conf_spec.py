@@ -37,6 +37,6 @@ class TestConfSpec:
         f.close()
         assert len(spec.offsets) == 10
         assert len(spec.column_names) == 10
-        assert spec.include_header is not ""
-        assert spec.encoding_format_fwt is not ""
-        assert spec.encoding_format_del is not ""
+        assert spec.include_header != "", True
+        assert spec.encoding_format_fwt != "", True
+        assert spec.encoding_format_del != "", True
