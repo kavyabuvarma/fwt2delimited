@@ -119,7 +119,7 @@ class Fwt:
         else:
             return fwt_file.name
 
-    def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "data/delimited.csv") -> int:
+    def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "data/delimited.csv") -> str:
         try:
             records_fwt = self.get_records_fwt_file(fwt_file)
             records_delimited = self.convert_records(records_fwt, delimiter)
@@ -129,4 +129,5 @@ class Fwt:
         except (IOError, ValueError, KeyError, LookupError):
             logging.error("Error while generating delimited file.")
             logging.exception("message")
-        return 0
+        else:
+            return delimited_file.name
