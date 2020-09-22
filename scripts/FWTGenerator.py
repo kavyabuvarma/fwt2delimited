@@ -27,8 +27,8 @@ if __name__ == "__main__":
 
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            print('FWTGenerator.py -s <path_to_fwt_spec_file> -f <path_to_fwt_file> -d <path_to_delimited_file> '
-                  '-l <system_logs_level>')
+            print('FWTGenerator.py -s <path_to_fwt_spec_file> -f <path_to_fwt_file> -n <number_of_records> '
+                  '-r <use_random_values> -l <system_logs_level>')
             sys.exit(2)
         elif opt in ('-s', '--specfwt'):
             fwt_spec_path = arg
