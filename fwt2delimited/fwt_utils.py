@@ -116,7 +116,7 @@ class Fwt:
         else:
             return lines
 
-    def generate_fwt_file(self, random_data=True, num_of_records: int = 20, file_path: str = "fwt_output.txt",
+    def generate_fwt_file(self, random_data=True, num_of_records: int = 20, file_name: str = "fwt_file.txt",
                           sample_values_json_str: str = get_sample_values("")) -> str:
         try:
             if random_data is True:
@@ -124,7 +124,7 @@ class Fwt:
             else:
                 lines = self.generate_dataset_from_sample(num_of_records, sample_values_json_str)
 
-            fwt_file = open(file_path, "w", encoding=self.spec.encoding_format_fwt)
+            fwt_file = open(file_name, "w", encoding=self.spec.encoding_format_fwt)
             fwt_file.write('\n'.join(lines))
         except (IOError, ValueError, KeyError, LookupError, FileNotFoundError):
             logging.error("Error while generating FWT file.")
@@ -132,7 +132,7 @@ class Fwt:
         else:
             return fwt_file.name
 
-    def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "data/delimited.csv") -> str:
+    def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "delimited_file.csv") -> str:
         try:
             records_fwt = self.get_records_fwt_file(fwt_file)
             records_delimited = self.convert_records(records_fwt, delimiter)
