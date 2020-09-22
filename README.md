@@ -3,39 +3,26 @@ Transform Fixed Width Text to Delimited
 
 ##Installation
 
-Wheel
+Package available here: from https://github.com/kavyabuvarma/fwt2delimited
+
+Unzip the bundle and navigate to the scripts directory: fwt2delimited/scripts
+
+### Executing the script
+
+##### Generate a fixed width file using a FWT specification file
 ```
-    pip install  fwt2delimited-1.0.0-py3-none-any.whl
+python FWTGenerator.py \
+              -s path_to_fwt_spec_file
+              -f path_to_output_fwt_file
+              -n number_of_records
+              -l logs_level
+              -r use_random_values              
 ```
-
-PyPi - not yet available
-```
-
-```
-
-##Usage samples
-```
-from fwt2delimited.fwt import Fwt
-...
-# construct Fwt with the default spec
-fwt = Fwt()
-
-# construct Fwt - pass the spec file name param
-fwt = Fwt(spec_file_name=<>)
- 
-# according to the spec mentioned, 
-# generate FWT - file name "fwt_file.txt" in current dir, using random dataset 
-fwt_fname = fwt.generate_fwt_file() 
-
-# generate FWT - file name in param "file_name" in current dir, default sample dataset  
-fwt_fname = fwt.generate_fwt_file(random_data=False, file_name=<filename>) 
-
-# generate FWT - file name "fwt_file.txt" in current dir, sample dataset in the param "sample_values_json_str" 
-fwt_fname = fwt.generate_fwt_file(random_data=False, sample_values_json_str=<jsonstr>)
-
-# convert FWT to delimited - default delimiter ',' , output file name "delimited_file.csv"
-delim_fname = fwt.fwt_to_delimited(fwt_fname)
-
-# convert FWT to delimited - delimiter and output file name specified in the param
-delim_fname = fwt.fwt_to_delimited(fwt_fname, delimited_file=<>)
-```
+- The parameters are all optional.
+- The default values are:
+    1. path_to_fwt_spec_file - fwt2delimited/data/spec.json
+    2. path_to_output_fwt_file - ./fwt_file.txt
+    3. number_of_records - 20
+    4. logs_level - INFO
+    5. use_random_values - False
+- To get help, run **`FWTGenerator.py -h`**

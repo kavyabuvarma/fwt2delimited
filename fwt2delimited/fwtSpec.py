@@ -2,7 +2,7 @@ import json
 import logging
 
 
-class ConfSpec:
+class FwtSpec:
     def __init__(self, spec_json):
 
         try:

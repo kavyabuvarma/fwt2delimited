@@ -23,5 +23,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
     ],
     include_package_data=True,
-    package_data={'': ['data/*']},
+    package_data={'': ['data/*', 'scripts/*']},
 )

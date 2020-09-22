@@ -9,7 +9,7 @@ class TestFwt:
     def test_gen_fwt_with_random_data(self):
 
         f = open("data/spec_valid.json")
-        spec = fwtSpec.ConfSpec(f)
+        spec = fwtSpec.FwtSpec(f)
         f.close()
         records = 10
 
@@ -32,7 +32,7 @@ class TestFwt:
     def test_gen_fwt_with_sample_data(self):
 
         f = open("data/spec_valid.json")
-        spec = fwtSpec.ConfSpec(f)
+        spec = fwtSpec.FwtSpec(f)
         f.close()
         records = 30
 
@@ -62,7 +62,7 @@ class TestFwt:
 
     def test_gen_convert_fwt(self):
         f = open("data/spec_valid.json")
-        spec = fwtSpec.ConfSpec(f)
+        spec = fwtSpec.FwtSpec(f)
         f.close()
         records = 5
 
@@ -88,7 +88,7 @@ class TestFwt:
         filename = str("this_file_doesnt_exist.txt")
 
         f = open("data/spec_valid.json")
-        spec = fwtSpec.ConfSpec(f)
+        spec = fwtSpec.FwtSpec(f)
         f.close()
 
         fwt = FwtParser(spec)

@@ -21,51 +21,23 @@ def generate_rand_value() -> str:
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=random.randint(1, 20)))
 
 
-class FwtParser:
-
+class FwtGen:
     def __init__(self, fwt_spec_file_name=None):
         if fwt_spec_file_name is None:
-            fwt_spec_file_name = "data/spec.json"
+            path_fwt_spec_path = Path(__file__).parent / "data/spec.json"
+            fwt_spec_file_name = str(path_fwt_spec_path)
             logging.info("Fwt with default spec file.")
 
         f = open(fwt_spec_file_name, "r")
-        spec = fwtSpec.ConfSpec(f)
+        spec = fwtSpec.FwtSpec(f)
         self.spec = spec
-
-    def get_records_fwt_file(self, fwt_file):
-        try:
-            encoding_format = self.spec.encoding_format_del
-            f = codecs.open(fwt_file, "r", encoding_format)
-            records = f.read().split("\n")
-        except TypeError:
-            logging.error("Error while reading FWT file.")
-            logging.exception("message")
-        else:
-            return records
-
-    def convert_records(self, records_fwt, delimiter):
-        try:
-            records_delimited = []
-            for record_fwt in records_fwt:
-                index_start = 0
-                values = []
-                for offset in self.spec.offsets_int:
-                    index_end = index_start + offset
-                    values.append(record_fwt[index_start: index_end].rstrip())
-                    index_start = index_end
-                records_delimited.append((delimiter.join(values))+"\n")
-        except (IOError, ValueError, KeyError, LookupError):
-            logging.error("Error while converting fwt to delimited.")
-            logging.exception("message")
-        else:
-            return records_delimited
 
     def add_header_if_true(self):
         if self.spec.include_header == "True":
             fields_array = []
             for key in self.spec.spec_dict:
                 fields_array.append(str.ljust(key, self.spec.spec_dict.get(key)))
-            return ''.join(fields_array)
+            return ''.join(fields_array)+"\n"
         else:
             return None
 
@@ -110,7 +82,7 @@ class FwtParser:
         else:
             return lines
 
-    def generate_fwt_file(self, random_data=True, num_of_records: int = 20, file_name: str = "fwt_file.txt",
+    def generate_fwt_file(self, random_data=False, num_of_records: int = 20, file_name: str = "fwt_file.txt",
                           sample_values_json_str: str = get_sample_values("")) -> str:
         try:
             if random_data is True:
@@ -125,6 +97,46 @@ class FwtParser:
             logging.exception("message")
         else:
             return fwt_file.name
+
+
+class FwtParser:
+
+    def __init__(self, fwt_spec_file_name=None):
+        if fwt_spec_file_name is None:
+            fwt_spec_file_name = "data/spec.json"
+            logging.info("Fwt with default spec file.")
+
+        f = open(fwt_spec_file_name, "r")
+        spec = fwtSpec.FwtSpec(f)
+        self.spec = spec
+
+    def get_records_fwt_file(self, fwt_file):
+        try:
+            encoding_format = self.spec.encoding_format_del
+            f = codecs.open(fwt_file, "r", encoding_format)
+            records = f.read().split("\n")
+        except TypeError:
+            logging.error("Error while reading FWT file.")
+            logging.exception("message")
+        else:
+            return records
+
+    def convert_records(self, records_fwt, delimiter):
+        try:
+            records_delimited = []
+            for record_fwt in records_fwt:
+                index_start = 0
+                values = []
+                for offset in self.spec.offsets_int:
+                    index_end = index_start + offset
+                    values.append(record_fwt[index_start: index_end].rstrip())
+                    index_start = index_end
+                records_delimited.append((delimiter.join(values))+"\n")
+        except (IOError, ValueError, KeyError, LookupError):
+            logging.error("Error while converting fwt to delimited.")
+            logging.exception("message")
+        else:
+            return records_delimited
 
     def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "delimited_file.csv") -> str:
         try:
