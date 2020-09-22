@@ -1,26 +1,27 @@
 # fwt2delimited
 Transform Fixed Width Text to Delimited
 
-###Installation
+##Installation
+
 Wheel
 ```
     pip install  fwt2delimited-1.0.0-py3-none-any.whl
 ```
 
-PyPi
+PyPi - not yet available
 ```
 
 ```
 
-###Usage samples
+##Usage samples
 ```
 from fwt2delimited.fwt import Fwt
 ...
-# construct Fwt with the spec mentioned
-fwt = Fwt(spec) 
-
 # construct Fwt with the default spec
 fwt = Fwt()
+
+# construct Fwt - pass the spec file name param
+fwt = Fwt(spec_file_name=<>)
  
 # according to the spec mentioned, 
 # generate FWT - file name "fwt_file.txt" in current dir, using random dataset 

@@ -1,5 +1,5 @@
-from fwt2delimited.fwt_utils import Fwt
-from fwt2delimited import conf_spec, fwt_utils
+from fwt2delimited.fwtUtils import FwtParser
+from fwt2delimited import fwtSpec, fwtUtils
 import os
 from pathlib import Path
 
@@ -9,11 +9,11 @@ class TestFwt:
     def test_gen_fwt_with_random_data(self):
 
         f = open("data/spec_valid.json")
-        spec = conf_spec.ConfSpec(f)
+        spec = fwtSpec.ConfSpec(f)
         f.close()
         records = 10
 
-        fwt = Fwt(spec)
+        fwt = FwtParser(spec)
 
         filepath = Path(__file__).parent / "data/rand_val_fwt.txt"
         print(str(filepath))
@@ -32,13 +32,13 @@ class TestFwt:
     def test_gen_fwt_with_sample_data(self):
 
         f = open("data/spec_valid.json")
-        spec = conf_spec.ConfSpec(f)
+        spec = fwtSpec.ConfSpec(f)
         f.close()
         records = 30
 
-        fwt = Fwt(spec)
+        fwt = FwtParser(spec)
 
-        sample_val_json = fwt_utils.get_sample_values("../fwt2delimited/data/sample_values.json")
+        sample_val_json = fwtUtils.get_sample_values("../fwt2delimited/data/sample_values.json")
         filepath = Path(__file__).parent / "data/sample_data_fwt.txt"
 
         fwt_file = fwt.generate_fwt_file(num_of_records=records, file_path=str(filepath),
@@ -62,11 +62,11 @@ class TestFwt:
 
     def test_gen_convert_fwt(self):
         f = open("data/spec_valid.json")
-        spec = conf_spec.ConfSpec(f)
+        spec = fwtSpec.ConfSpec(f)
         f.close()
         records = 5
 
-        fwt = Fwt(spec)
+        fwt = FwtParser(spec)
 
         fwt_filename = fwt.generate_fwt_file(num_of_records=records, random_data=False)
         fn = fwt_filename
@@ -88,10 +88,10 @@ class TestFwt:
         filename = str("this_file_doesnt_exist.txt")
 
         f = open("data/spec_valid.json")
-        spec = conf_spec.ConfSpec(f)
+        spec = fwtSpec.ConfSpec(f)
         f.close()
 
-        fwt = Fwt(spec)
+        fwt = FwtParser(spec)
         delimited_file = fwt.fwt_to_delimited(filename)
         assert delimited_file is None, True
 
