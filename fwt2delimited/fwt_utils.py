@@ -4,6 +4,7 @@ from pathlib import Path
 import random
 import string
 import codecs
+from fwt2delimited import conf_spec
 
 
 def get_sample_values(filepath) -> str:
@@ -22,8 +23,20 @@ def generate_rand_value() -> str:
 
 class Fwt:
 
-    def __init__(self, spec):
+    def __init__(self):
+        logging.info("Fwt with default spec file.")
+        f = open("data/spec.json", "r")
+        spec = conf_spec.ConfSpec(f)
         self.spec = spec
+
+    def __init__(self, spec=None):
+        if spec is None:
+            logging.info("Fwt with default spec file.")
+            f = open("data/spec.json", "r")
+            spec = conf_spec.ConfSpec(f)
+            self.spec = spec
+        else:
+            self.spec = spec
 
     def get_records_fwt_file(self, fwt_file):
         try:
@@ -103,7 +116,7 @@ class Fwt:
         else:
             return lines
 
-    def generate_fwt_file(self, random_data=True, num_of_records: int = 20, file_path: str = "data/fwt.txt",
+    def generate_fwt_file(self, random_data=True, num_of_records: int = 20, file_path: str = "fwt_output.txt",
                           sample_values_json_str: str = get_sample_values("")) -> str:
         try:
             if random_data is True:
@@ -113,7 +126,7 @@ class Fwt:
 
             fwt_file = open(file_path, "w", encoding=self.spec.encoding_format_fwt)
             fwt_file.write('\n'.join(lines))
-        except (IOError, ValueError, KeyError, LookupError):
+        except (IOError, ValueError, KeyError, LookupError, FileNotFoundError):
             logging.error("Error while generating FWT file.")
             logging.exception("message")
         else:
