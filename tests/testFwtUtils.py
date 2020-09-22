@@ -1,5 +1,4 @@
-from fwt2delimited.fwtUtils import FwtParser
-from fwt2delimited import fwtSpec, fwtUtils
+from fwt import FwtParser, fwtSpec, fwtUtils
 import os
 from pathlib import Path
 
@@ -15,7 +14,7 @@ class TestFwt:
 
         fwt = FwtParser(spec)
 
-        filepath = Path(__file__).parent / "data/rand_val_fwt.txt"
+        filepath = Path(__file__).parent / "config/rand_val_fwt.txt"
         print(str(filepath))
         fwt.generate_fwt_file(num_of_records=records, file_path=str(filepath))
         assert os.path.exists(str(filepath)), True
@@ -38,8 +37,8 @@ class TestFwt:
 
         fwt = FwtParser(spec)
 
-        sample_val_json = fwtUtils.get_sample_values("../fwt2delimited/data/sample_values.json")
-        filepath = Path(__file__).parent / "data/sample_data_fwt.txt"
+        sample_val_json = fwtUtils.get_sample_values("../config/sample_values.json")
+        filepath = Path(__file__).parent / "config/sample_data_fwt.txt"
 
         fwt_file = fwt.generate_fwt_file(num_of_records=records, file_path=str(filepath),
                                          sample_values_json_str=sample_val_json,
@@ -96,7 +95,7 @@ class TestFwt:
         assert delimited_file is None, True
 
     def test_convert_fwt_additional_columns(self):
-        # should ignore extra data
+        # should ignore extra config
         pass
 
     def test_convert_fwt_less_columns(self):

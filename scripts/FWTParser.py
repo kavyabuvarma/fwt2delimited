@@ -2,11 +2,12 @@ import getopt
 import sys
 
 if __name__ == "__main__":
+    sys.path.append('D:/code_repo/fwt2delimited')
     # default values
-    fwt_spec_path = "../fwt2delimited/data/spec.json"
-    fwt_file_path = "fwt_file.txt"
+    fwt_spec_path = "../config/spec.json"
+    fwt_file_path = "../fwt_file.txt"
     delimited_file_path = "delimited_file.csv"
-    sample_data_file_path = "../fwt2delimited/data/sample_values.json"
+    sample_data_file_path = "../config/sample_values.json"
     system_logs_level = "INFO"
 
     try:
@@ -18,7 +19,7 @@ if __name__ == "__main__":
               " \n '-f' - path to the FWT file"
               " \n '-d' - path to the delimited file"
               " \n '-l' - FWTParser system logs level"
-              " \n '-v' - set \"random\" or any value to use random data for FWT file"
+              " \n '-v' - set \"random\" or any value to use random config for FWT file"
               " \n Or no arguments at all in order to use default values")
         sys.exit(2)
 
@@ -42,4 +43,4 @@ if __name__ == "__main__":
 
 
 
-    print("fwt2delimited")
+    print("fwt")

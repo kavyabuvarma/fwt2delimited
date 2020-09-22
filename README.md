@@ -1,15 +1,18 @@
 # fwt2delimited
 Transform Fixed Width Text to Delimited
 
-## Installation
+### Getting started
 
 Package available here: from https://github.com/kavyabuvarma/fwt2delimited
 
 Unzip the bundle and navigate to the scripts directory: fwt2delimited/scripts
 
+Add the bundle directory path to the "PYTHONPATH" environment variable
+
 ### Executing the script
 
 ##### Generate a fixed width file using a FWT specification file
+
 ```
 python FWTGenerator.py \
               -s path_to_fwt_spec_file

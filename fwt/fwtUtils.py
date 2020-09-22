@@ -1,15 +1,15 @@
 import logging
+import codecs
 import json
-from pathlib import Path
 import random
 import string
-import codecs
-from fwt2delimited import fwtSpec
+from pathlib import Path
+from fwt import fwtSpec
 
 
 def get_sample_values(filepath) -> str:
     if filepath == "":
-        filepath = "data/sample_values.json"
+        filepath = "../config/sample_values.json"
     path = Path(__file__).parent / filepath
     with path.open() as f:
         f = open(path)
@@ -24,7 +24,7 @@ def generate_rand_value() -> str:
 class FwtGen:
     def __init__(self, fwt_spec_file_name=None):
         if fwt_spec_file_name is None:
-            path_fwt_spec_path = Path(__file__).parent / "data/spec.json"
+            path_fwt_spec_path = Path(__file__).parent.parent / "config/spec.json"
             fwt_spec_file_name = str(path_fwt_spec_path)
             logging.info("Fwt with default spec file.")
 
@@ -103,7 +103,7 @@ class FwtParser:
 
     def __init__(self, fwt_spec_file_name=None):
         if fwt_spec_file_name is None:
-            fwt_spec_file_name = "data/spec.json"
+            fwt_spec_file_name = "../config/spec.json"
             logging.info("Fwt with default spec file.")
 
         f = open(fwt_spec_file_name, "r")

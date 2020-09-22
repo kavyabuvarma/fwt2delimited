@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="fwt2delimited",
+    name="fwt",
     version="1.0.0",
     author="Kavya Varma",
     author_email="kavyabu@gmail.com",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/kavyabuvarma/fwt2delimited",
     packages=setuptools.find_packages(),
-    keywords="fwt2delimited fwt delimited fixedwidthtext",
+    keywords="fwt fwt delimited fixedwidthtext",
     project_urls={
         'Source': "https://github.com/kavyabuvarma/fwt2delimited"
     },
@@ -23,5 +23,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
     ],
     include_package_data=True,
-    package_data={'': ['data/*', 'scripts/*']},
+    package_data={'': ['config/*']},
 )

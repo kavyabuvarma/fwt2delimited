@@ -1,12 +1,12 @@
 import getopt
 import sys
 from pathlib import Path
-from fwt2delimited.fwtUtils import FwtGen
+from fwt.fwtUtils import FwtGen
 
 if __name__ == "__main__":
     # default values
     fwt_file_path = "fwt_file.txt"
-    path_sample_data_file_path = Path(__file__).parent.parent / "fwt2delimited/data/sample_values.json"
+    path_sample_data_file_path = Path(__file__).parent.parent / "config/sample_values.json"
     sample_data_file_path = str(path_sample_data_file_path)
     system_logs_level = "INFO"
     number_of_records = 20
@@ -35,7 +35,7 @@ if __name__ == "__main__":
         elif opt in ('-f', '--fwtfilepath'):
             fwt_file_path = arg
         elif opt in ('-n', '--numofrecords'):
-            number_of_records = arg
+            number_of_records = int(arg)
         elif opt in ('-r', '--userandomvalues'):
             use_random_values = True
         elif opt in ('-l', '--loglevel'):
