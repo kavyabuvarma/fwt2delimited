@@ -1,0 +1,6 @@
+f1   f2          f4f5           f7        f8           f9                  f10
+WALK SYDNEY      NANOT SPECIFIEDNSW       0.0          INDIA               BLAH
+PLAY SYDNEY      I NEUTRAL      ACT       25.67        SINGAPORE           ËÄS TU
+WALK PERTH       G NOT SPECIFIEDDEF VAL   0.0          INDIA               ËÄS TU
+SLEEPHOBART      T SAD          ACT       3925935.12   PHILIPPINES         BLAH
+WALK PERTH       NAHAPPY        DEF VAL   25.67        NEW ZEALAND         NOT SPECIFIED

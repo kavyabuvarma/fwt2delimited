@@ -1,0 +1,6 @@
+f1   f2          f3 f4f5           f6     f7        f8           f9                  f10          f11
+WALK SYDNEY      USDNANOT SPECIFIEDINVALIDNSW       0.0          INDIA               BLAH         0.0
+PLAY SYDNEY      GBPI NEUTRAL      INVALIDACT       25.67        SINGAPORE           ËÄS TU       25.67
+WALK PERTH       USDG NOT SPECIFIEDTWO    DEF VAL   0.0          INDIA               ËÄS TU       0.0
+SLEEPHOBART      AUDT SAD          ONE    ACT       3925935.12   PHILIPPINES         BLAH         3925935.12
+WALK PERTH       AUDNAHAPPY        TWO    DEF VAL   25.67        NEW ZEALAND         NOT SPECIFIED25.67

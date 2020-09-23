@@ -8,31 +8,31 @@ class TestConfSpec:
         pytest.raises(AttributeError)
 
     def test_invalid_spec_data(self):
-        f = open("data/spec_invalid1.json", "r")
+        f = open("files/spec_invalid1.json", "r")
         fwtSpec.FwtSpec(f)
         f.close()
         pytest.raises(KeyError)
 
     def test_invalid_spec_data2(self):
-        f = open("data/spec_invalid2.json", "r")
+        f = open("files/spec_invalid2.json", "r")
         fwtSpec.FwtSpec(f)
         f.close()
         pytest.raises(ValueError)
 
     def test_invalid_json_content(self):
-        f = open("data/spec_invalid3.json", "r")
+        f = open("files/spec_invalid3.json", "r")
         fwtSpec.FwtSpec(f)
         f.close()
         pytest.raises(ValueError)
 
     def test_invalid_file_type(self):
-        f = open("data/spec_invalid4.txt", "r")
+        f = open("files/spec_invalid4.txt", "r")
         fwtSpec.FwtSpec(f)
         f.close()
         pytest.raises(ValueError)
 
     def test_valid_spec(self):
-        f = open("data/spec_valid.json", "r")
+        f = open("files/spec_valid.json", "r")
         spec = fwtSpec.FwtSpec(f)
         f.close()
         assert len(spec.offsets) == 10
@@ -40,7 +40,3 @@ class TestConfSpec:
         assert spec.include_header != "", True
         assert spec.encoding_format_fwt != "", True
         assert spec.encoding_format_del != "", True
-
-    def test_default_spec(self):
-        # should return default spec from config folder
-        pass

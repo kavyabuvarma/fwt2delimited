@@ -1,0 +1,10 @@
+f1   f2          f3 f4f5           f6     f7        f8           f9                  f10          
+PLAY MELBOURNE   INRL SAD          ONE    TASMANIA  3925935.12   NEW ZEALAND         NOT SPECIFIED
+WORK MELBOURNE   USDF HAPPY        FOUR   SA        25.67        PHILIPPINES         ßÌ         
+PLAY PERTH       AUDB SAD          FIVE   NSW       3925935.12   INDIA               BLAH         
+EAT  PERTH       GBPG NOT SPECIFIEDFIVE   WA        3925935.12   PHILIPPINES         BLAH         
+WORK HOBART      USDO NEUTRAL      THREE  NT        3925935.12   AUSTRALIA           NOT SPECIFIED
+PLAY HOBART      INRM NEUTRAL      FIVE   TASMANIA  25.67        INDIA               BLAH         
+WORK MELBOURNE   INRI NOT SPECIFIEDTHREE  ACT       25.67        SINGAPORE           NOT SPECIFIED
+EAT  MELBOURNE   AUDG NOT SPECIFIEDFOUR   NSW       3925935.12   NEW ZEALAND         NOT SPECIFIED
+PLAY HOBART      INRL HAPPY        FIVE   VICTORIA  25.67        PHILIPPINES         ßÌ         

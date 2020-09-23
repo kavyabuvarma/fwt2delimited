@@ -1,0 +1,10 @@
+c1   c2          c3 c4c5           c6     c7        c8           c9                  c10          
+WORK SYDNEY      AUDL NEUTRAL      FOUR   WA        25.67        NEW ZEALAND         ßÌ         
+EAT  PERTH       INRF HAPPY        INVALIDDEF VAL   3925935.12   INDIA               ßÌ         
+WORK HOBART      GBPT NOT SPECIFIEDONE    SA        3925935.12   PHILIPPINES         BLAH         
+WALK HOBART      INRB NEUTRAL      FOUR   SA        3925935.12   AUSTRALIA           NOT SPECIFIED
+WALK MELBOURNE   USDO NEUTRAL      TWO    NSW       3925935.12   UNITED ARAB EMIRATESßÌ         
+EAT  PERTH       INRL NOT SPECIFIEDTHREE  NT        46282.67     SINGAPORE           ßÌ         
+EAT  PERTH       AUDF NEUTRAL      INVALIDTASMANIA  46282.67     SINGAPORE           BLAH         
+WALK HOBART      X  O NOT SPECIFIEDINVALIDACT       46282.67     AUSTRALIA           ßÌ         
+WORK MELBOURNE   GBPNANEUTRAL      ONE    DEF VAL   25.67        INDIA               BLAH         
