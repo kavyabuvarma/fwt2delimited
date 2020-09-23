@@ -14,11 +14,11 @@ class TestFwt:
 
         fwt_gen = FwtGen(str(f_path))
 
-        filepath = Path(__file__).parent.parent / "out/fwt_rand_val.txt"
-        fwt_gen.generate_fwt_file(num_of_records=records, file_name=str(filepath))
-        assert os.path.exists(str(filepath)), True
+        filepath = "out/fwt_rand_val.txt"
+        fwt_filename = fwt_gen.generate_fwt_file(num_of_records=records, file_name=filepath)
+        assert os.path.exists(fwt_filename), True
 
-        out_file = open(filepath, "r")
+        out_file = open(fwt_filename, "r")
         file_content = out_file.read()
         lines = file_content.split("\n")
         exp_record_len = sum(fwt_gen.spec.offsets_int)

@@ -92,7 +92,7 @@ class FwtGen:
 
             fwt_file = open(file_name, "w", encoding=self.spec.encoding_format_fwt)
             fwt_file.write(''.join(lines))
-        except (IOError, ValueError, KeyError, LookupError, FileNotFoundError):
+        except (IOError, ValueError, KeyError, LookupError, FileNotFoundError) as e:
             logging.error("Error while generating FWT file.")
             logging.exception("message")
         else:
