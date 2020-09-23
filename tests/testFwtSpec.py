@@ -42,5 +42,5 @@ class TestConfSpec:
         assert spec.encoding_format_del != "", True
 
     def test_default_spec(self):
-        #should return default spec from config folder
+        # should return default spec from config folder
         pass

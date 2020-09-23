@@ -9,8 +9,8 @@ from fwt import fwtSpec
 
 def get_sample_values(filepath) -> str:
     if filepath == "":
-        filepath = "../config/sample_values.json"
-    path = Path(__file__).parent / filepath
+        filepath = "config/sample_values.json"
+    path = Path(__file__).parent.parent / filepath
     with path.open() as f:
         f = open(path)
         sample_values = f.read()
@@ -103,7 +103,8 @@ class FwtParser:
 
     def __init__(self, fwt_spec_file_name=None):
         if fwt_spec_file_name is None:
-            fwt_spec_file_name = "../config/spec.json"
+            path_fwt_spec_path = Path(__file__).parent.parent / "config/spec.json"
+            fwt_spec_file_name = str(path_fwt_spec_path)
             logging.info("Fwt with default spec file.")
 
         f = open(fwt_spec_file_name, "r")
@@ -115,11 +116,12 @@ class FwtParser:
             encoding_format = self.spec.encoding_format_del
             f = codecs.open(fwt_file, "r", encoding_format)
             records = f.read().split("\n")
+            records_nonempty = (record for record in records if len(record) != 0)
         except TypeError:
             logging.error("Error while reading FWT file.")
             logging.exception("message")
         else:
-            return records
+            return records_nonempty
 
     def convert_records(self, records_fwt, delimiter):
         try:

@@ -1,4 +1,5 @@
-from fwt import FwtParser, fwtSpec, fwtUtils
+from fwt.fwtSpec import FwtSpec
+from fwt.fwtUtils import FwtParser
 import os
 from pathlib import Path
 
@@ -7,14 +8,14 @@ class TestFwt:
 
     def test_gen_fwt_with_random_data(self):
 
-        f = open("data/spec_valid.json")
-        spec = fwtSpec.FwtSpec(f)
+        f = open("config/spec_valid.json")
+        spec = FwtSpec(f)
         f.close()
         records = 10
 
         fwt = FwtParser(spec)
 
-        filepath = Path(__file__).parent / "config/rand_val_fwt.txt"
+        filepath = Path(__file__).parent.parent / "config/rand_val_fwt.txt"
         print(str(filepath))
         fwt.generate_fwt_file(num_of_records=records, file_path=str(filepath))
         assert os.path.exists(str(filepath)), True
@@ -30,14 +31,14 @@ class TestFwt:
 
     def test_gen_fwt_with_sample_data(self):
 
-        f = open("data/spec_valid.json")
-        spec = fwtSpec.FwtSpec(f)
+        f = open("config/spec_valid.json")
+        spec = FwtSpec(f)
         f.close()
         records = 30
 
         fwt = FwtParser(spec)
 
-        sample_val_json = fwtUtils.get_sample_values("../config/sample_values.json")
+        sample_val_json = fwt.get_sample_values("config/sample_values.json")
         filepath = Path(__file__).parent / "config/sample_data_fwt.txt"
 
         fwt_file = fwt.generate_fwt_file(num_of_records=records, file_path=str(filepath),
@@ -61,7 +62,7 @@ class TestFwt:
 
     def test_gen_convert_fwt(self):
         f = open("data/spec_valid.json")
-        spec = fwtSpec.FwtSpec(f)
+        spec = FwtSpec(f)
         f.close()
         records = 5
 
@@ -87,7 +88,7 @@ class TestFwt:
         filename = str("this_file_doesnt_exist.txt")
 
         f = open("data/spec_valid.json")
-        spec = fwtSpec.FwtSpec(f)
+        spec = FwtSpec(f)
         f.close()
 
         fwt = FwtParser(spec)

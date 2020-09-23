@@ -10,11 +10,14 @@ if __name__ == "__main__":
     sample_data_file_path = str(path_sample_data_file_path)
     system_logs_level = "INFO"
     number_of_records = 20
+
     use_random_values = False
+    fwt_spec_path = None
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 's:f:n:l:r:h', ['specfwt=', 'fwtfilepath=', 'numofrecords=', 'loglevel=',
-                                                                 "userandomvalues=", 'help'])
+        opts, args = getopt.getopt(sys.argv[1:], 's:f:n:l:r:h',
+                                   ['specfwt=', 'fwtfilepath=', 'numofrecords=', 'loglevel=',
+                                    "userandomvalues=", 'help'])
     except getopt.GetoptError:
         print("Error executing FWT Generator. The following arguments should be provided:"
               " \n '-s' - path to the FWT specification file"
@@ -43,9 +46,13 @@ if __name__ == "__main__":
             if system_logs_level not in ["DEBUG", "INFO", "ERROR"]:
                 sys.exit("Provided system logs level is not supported. Supported levels are DEBUG, INFO and ERROR")
 
-    fwt_gen = FwtGen()
-    fwt_file = fwt_gen.generate_fwt_file(random_data=use_random_values, num_of_records=number_of_records,
-                                         file_name=fwt_file_path)
+    if fwt_spec_path is None:
+        fwtGen = FwtGen()
+    else:
+        fwtGen = FwtGen(fwt_spec_path)
+
+    fwt_file = fwtGen.generate_fwt_file(random_data=use_random_values, num_of_records=number_of_records,
+                                        file_name=fwt_file_path)
     if fwt_file is not None:
         print("FWT file generated :", fwt_file)
     else:
