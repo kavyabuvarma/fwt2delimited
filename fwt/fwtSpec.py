@@ -4,6 +4,7 @@ import logging
 
 class FwtSpec:
     def __init__(self, spec_json):
+        self.logger = logging.getLogger("fwt2delimited")
 
         try:
             spec_json_obj = json.load(spec_json)
@@ -20,13 +21,11 @@ class FwtSpec:
                 raise ValueError("The number of columns do not match the number of offsets in the spec.")
 
             if self.include_header not in ["True", "False"]:
-                logging.warning("Invalid value for the key 'IncludeHeader', expected one of [\"True\", \"False\"]. "
-                                "Setting 'Include Header' = True.")
+                self.logger.warning("Invalid value for the key 'IncludeHeader', expected one of [\"True\", \"False\"]. "
+                                    "Setting 'Include Header' = True.")
                 self.include_header = True
         except AttributeError:
-            logging.error("Invalid config param, expected : File Pointer.")
-            pass
+            self.logger.error("Invalid config param, expected : File Pointer.")
         except (KeyError, ValueError) as e:
-            logging.error("Invalid config specification content.")
-            logging.exception(e)
-            pass
+            self.logger.error("Invalid config specification content.")
+            self.logger.exception(e)

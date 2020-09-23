@@ -23,10 +23,12 @@ def generate_rand_value() -> str:
 
 class FwtGen:
     def __init__(self, fwt_spec_file_name=None):
+        self.logger = logging.getLogger("fwt2delimited")
+
         if fwt_spec_file_name is None:
             path_fwt_spec_path = Path(__file__).parent.parent / "config/spec.json"
             fwt_spec_file_name = str(path_fwt_spec_path)
-            logging.info("Fwt with default spec file.")
+            self.logger.info("Fwt with default spec file.")
 
         f = open(fwt_spec_file_name, "r")
         spec = fwtSpec.FwtSpec(f)
@@ -53,8 +55,8 @@ class FwtGen:
                     values_array.append(str.ljust(generate_rand_value(), offset)[0:offset])
                 lines.append((''.join(values_array)) + "\n")
         except (IOError, ValueError, KeyError, LookupError):
-            logging.error("Error while generating FWT file with random data.")
-            logging.exception("message")
+            self.logger.error("Error while generating FWT file with random data.")
+            self.logger.exception("message", exc_info=True)
         else:
             return lines
 
@@ -77,8 +79,8 @@ class FwtGen:
                     values_array.append(str.ljust(random.choice(rand_values), self.spec.spec_dict.get(key)))
                 lines.append((''.join(values_array)) + "\n")
         except (IOError, ValueError, KeyError, LookupError):
-            logging.error("Error while generating FWT file with sample dataset.")
-            logging.exception("message")
+            self.logger.error("Error while generating FWT file with sample dataset.")
+            logging.exception("message", exc_info=True)
         else:
             return lines
 
@@ -93,8 +95,8 @@ class FwtGen:
             fwt_file = open(file_name, "w", encoding=self.spec.encoding_format_fwt)
             fwt_file.write(''.join(lines))
         except (IOError, ValueError, KeyError, LookupError, FileNotFoundError) as e:
-            logging.error("Error while generating FWT file.")
-            logging.exception("message")
+            self.logger.error("Error while generating FWT file.")
+            self.logger.exception("message", exc_info=True)
         else:
             return fwt_file.name
 
@@ -102,6 +104,7 @@ class FwtGen:
 class FwtParser:
 
     def __init__(self, fwt_spec_file_name=None):
+        self.logger = logging.getLogger("fwt2delimited")
         if fwt_spec_file_name is None:
             path_fwt_spec_path = Path(__file__).parent.parent / "config/spec.json"
             fwt_spec_file_name = str(path_fwt_spec_path)
@@ -119,13 +122,13 @@ class FwtParser:
             header = str(records[0].replace(' ', '').strip())
             col_names = str(''.join(self.spec.column_names).strip())
             if header != col_names:
-                logging.error("Invalid file. FWT does not match the specification, please check the column names.")
+                self.logger.error("Invalid file. FWT does not match the specification, please check the column names.")
                 return
             else:
                 records_nonempty = (record for record in records if len(record) != 0)
         except TypeError:
-            logging.error("Error while reading FWT file.")
-            logging.exception("message")
+            self.logger.error("Error while reading FWT file.")
+            self.logger.exception("message", execInfo=True)
         else:
             return records_nonempty
 
@@ -141,23 +144,27 @@ class FwtParser:
                     index_start = index_end
                 records_delimited.append((delimiter.join(values)) + "\n")
         except (IOError, ValueError, KeyError, LookupError):
-            logging.error("Error while converting fwt to delimited.")
-            logging.exception("message")
+            self.logger.error("Error while converting fwt to delimited.")
+            self.logger.exception("message", execInfo=True)
         else:
             return records_delimited
 
     def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "delimited_file.csv") -> str:
         try:
-            records_fwt = self.get_records_fwt_file(fwt_file)
-            if records_fwt is None:
+            if Path(fwt_file).is_file():
+                records_fwt = self.get_records_fwt_file(fwt_file)
+                if records_fwt is None:
+                    return
+
+                records_delimited = self.convert_records(records_fwt, delimiter)
+
+                delimited_file = open(delimited_file, "w", encoding=self.spec.encoding_format_del)
+                delimited_file.write(''.join(records_delimited))
+            else:
+                self.logger.error("FWT file is empty or does not exist.")
                 return
-
-            records_delimited = self.convert_records(records_fwt, delimiter)
-
-            delimited_file = open(delimited_file, "w", encoding=self.spec.encoding_format_del)
-            delimited_file.write(''.join(records_delimited))
         except (IOError, ValueError, KeyError, LookupError):
-            logging.error("Error while generating delimited file.")
-            logging.exception("message")
+            self.logger.error("Error while generating delimited file.")
+            self.logger.exception("message", execInfo=True)
         else:
             return delimited_file.name
