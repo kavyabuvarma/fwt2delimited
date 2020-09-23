@@ -11,7 +11,7 @@ Add the bundle directory path to the "PYTHONPATH" environment variable
 
 ### Executing the script
 
-##### Generate a fixed width file using a FWT specification file
+##### 1. Generate a fixed width file using a FWT specification file
 
 ```
 python FWTGenerator.py \
@@ -30,7 +30,7 @@ python FWTGenerator.py \
     5. **use_random_values** - False
 - To get help, run **`FWTGenerator.py -h`**
 
-##### Convert a fixed width file to a delimited file using a FWT specification file
+##### 2. Convert a fixed width file to a delimited file using a FWT specification file
 
 ```
 python FWTConverter.py \

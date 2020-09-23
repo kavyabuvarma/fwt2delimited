@@ -37,7 +37,7 @@ class FwtGen:
             fields_array = []
             for key in self.spec.spec_dict:
                 fields_array.append(str.ljust(key, self.spec.spec_dict.get(key)))
-            return ''.join(fields_array)+"\n"
+            return ''.join(fields_array) + "\n"
         else:
             return None
 
@@ -51,7 +51,7 @@ class FwtGen:
                 values_array = []
                 for offset in self.spec.offsets_int:
                     values_array.append(str.ljust(generate_rand_value(), offset)[0:offset])
-                lines.append((''.join(values_array))+"\n")
+                lines.append((''.join(values_array)) + "\n")
         except (IOError, ValueError, KeyError, LookupError):
             logging.error("Error while generating FWT file with random data.")
             logging.exception("message")
@@ -75,7 +75,7 @@ class FwtGen:
                     else:
                         rand_values = [generate_rand_value(), generate_rand_value(), generate_rand_value()]
                     values_array.append(str.ljust(random.choice(rand_values), self.spec.spec_dict.get(key)))
-                lines.append((''.join(values_array))+"\n")
+                lines.append((''.join(values_array)) + "\n")
         except (IOError, ValueError, KeyError, LookupError):
             logging.error("Error while generating FWT file with sample dataset.")
             logging.exception("message")
@@ -113,10 +113,16 @@ class FwtParser:
 
     def get_records_fwt_file(self, fwt_file):
         try:
-            encoding_format = self.spec.encoding_format_del
+            encoding_format = self.spec.encoding_format_fwt
             f = codecs.open(fwt_file, "r", encoding_format)
             records = f.read().split("\n")
-            records_nonempty = (record for record in records if len(record) != 0)
+            header = str(records[0].replace(' ', '').strip())
+            col_names = str(''.join(self.spec.column_names).strip())
+            if header != col_names:
+                logging.error("Invalid file. FWT does not match the specification, please check the column names.")
+                return
+            else:
+                records_nonempty = (record for record in records if len(record) != 0)
         except TypeError:
             logging.error("Error while reading FWT file.")
             logging.exception("message")
@@ -133,7 +139,7 @@ class FwtParser:
                     index_end = index_start + offset
                     values.append(record_fwt[index_start: index_end].rstrip())
                     index_start = index_end
-                records_delimited.append((delimiter.join(values))+"\n")
+                records_delimited.append((delimiter.join(values)) + "\n")
         except (IOError, ValueError, KeyError, LookupError):
             logging.error("Error while converting fwt to delimited.")
             logging.exception("message")
@@ -143,6 +149,9 @@ class FwtParser:
     def fwt_to_delimited(self, fwt_file: str, delimiter: str = ',', delimited_file: str = "delimited_file.csv") -> str:
         try:
             records_fwt = self.get_records_fwt_file(fwt_file)
+            if records_fwt is None:
+                return
+
             records_delimited = self.convert_records(records_fwt, delimiter)
 
             delimited_file = open(delimited_file, "w", encoding=self.spec.encoding_format_del)

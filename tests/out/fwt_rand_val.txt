@@ -1,0 +1,10 @@
+f1   f2          f3 f4f5           f6     f7        f8           f9                  f10          
+WALK SYDNEY      USDL SAD          TWO    WA        0.0          AUSTRALIA           NOT SPECIFIED
+WALK PERTH       GBPI HAPPY        THREE  NT        25.67        INDIA               ËÄS TU     
+PLAY MELBOURNE   GBPNANOT SPECIFIEDFIVE   NSW       0.0          INDIA               NOT SPECIFIED
+WORK MELBOURNE   AUDB NOT SPECIFIEDTHREE  NT        3925935.12   INDIA               NOT SPECIFIED
+EAT  SYDNEY      USDI HAPPY        ONE    WA        3925935.12   UNITED ARAB EMIRATESßÌ         
+EAT  SYDNEY      USDI SAD          INVALIDWA        3925935.12   UNITED ARAB EMIRATESßÌ         
+SLEEPHOBART      USDG NEUTRAL      ONE    DEF VAL   46282.67     SINGAPORE           NOT SPECIFIED
+WALK HOBART      GBPF SAD          TWO    VICTORIA  25.67        PHILIPPINES         ËÄS TU     
+PLAY HOBART      USDL SAD          THREE  VICTORIA  46282.67     PHILIPPINES         ËÄS TU     
