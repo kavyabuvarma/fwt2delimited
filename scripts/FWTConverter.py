@@ -37,8 +37,6 @@ if __name__ == "__main__":
         elif opt in ('-s', '--specfwt'):
             fwt_spec_path = arg
         elif opt in ('-f', '--fwtfilepath'):
-            if fwt_file_path is None:
-                sys.exit("Please provide the mandatory param FWT file path: -f or --fwtfilepath")
             fwt_file_path = arg
         elif opt in ('-o', '--delimitedfilepath'):
             delimited_file_path = arg
@@ -58,7 +56,7 @@ if __name__ == "__main__":
               " \n '-l' - FWTParser system logs level"
               " \n Default values will be considered for the optional arguments if not provided.")
         sys.exit(1)
-        
+
     logging.basicConfig(format='%(levelname)s - %(asctime)s - %(message)s', level=system_logs_level)
 
     if fwt_spec_path is None:
