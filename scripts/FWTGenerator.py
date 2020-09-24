@@ -1,9 +1,11 @@
 import getopt
 import sys
+import logging
 from pathlib import Path
 from fwt.fwtUtils import FwtGen
 
 if __name__ == "__main__":
+
     # default values
     fwt_file_path = "fwt_file.txt"
     path_sample_data_file_path = Path(__file__).parent.parent / "config/sample_values.json"
@@ -19,13 +21,13 @@ if __name__ == "__main__":
                                    ['specfwt=', 'fwtfilepath=', 'numofrecords=', 'loglevel=',
                                     "userandomvalues=", 'help'])
     except getopt.GetoptError:
-        print("Error executing FWT Generator. The following arguments should be provided:"
+        print("Error executing FWT Generator. The arguments supported are:"
               " \n '-s' - path to the FWT specification file"
               " \n '-f' - path to the output FWT file"
               " \n '-n' - number of records"
               " \n '-l' - FWTGenerator system logs level"
               " \n '-r' - set \"random\" or any value to use random data for FWT file"
-              " \n Or no arguments at all in order to use default values")
+              " \n Default values for the arguments will be considered when not provided.")
         sys.exit(2)
 
     for opt, arg in opts:
@@ -46,6 +48,8 @@ if __name__ == "__main__":
             if system_logs_level not in ["DEBUG", "INFO", "ERROR"]:
                 sys.exit("Provided system logs level is not supported. Supported levels are DEBUG, INFO and ERROR")
 
+    logging.basicConfig(format='%(levelname)s - %(asctime)s - %(message)s', level=system_logs_level)
+
     if fwt_spec_path is None:
         fwtGen = FwtGen()
     else:
@@ -54,6 +58,6 @@ if __name__ == "__main__":
     fwt_file = fwtGen.generate_fwt_file(random_data=use_random_values, num_of_records=number_of_records,
                                         file_name=fwt_file_path)
     if fwt_file is not None:
-        print("FWT file generated :", fwt_file)
+        logging.info("FWT file generated : %s", fwt_file)
     else:
-        sys.exit("Error generating FWT file.")
+        logging.error("Error generating FWT file.")

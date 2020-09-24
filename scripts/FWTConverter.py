@@ -1,5 +1,6 @@
 import getopt
 import sys
+import logging
 from fwt.fwtUtils import FwtParser
 
 if __name__ == "__main__":
@@ -16,13 +17,13 @@ if __name__ == "__main__":
         opts, args = getopt.getopt(sys.argv[1:], 's:f:o:d:l:h', ['specfwt=', 'fwtfilepath=', 'delimitedfilepath=',
                                                                  'delimiter=', 'loglevel=', 'help'])
     except getopt.GetoptError:
-        print("Error starting FWT Parser. The following arguments should be provided:"
+        print("Error starting FWT Parser. The arguments supported are:"
               " \n '-s' - path to the FWT specification file"
-              " \n '-f' - path to the FWT file"
+              " \n '-f' - path to the FWT file - MANDATORY"
               " \n '-o' - path to the delimited file"
               " \n '-d' - delimiter to be used"
               " \n '-l' - FWTParser system logs level"
-              " \n Or no arguments at all in order to use default values")
+              " \n Default values will be considered for the optional arguments if not provided.")
         sys.exit(2)
 
     for opt, arg in opts:
@@ -43,18 +44,20 @@ if __name__ == "__main__":
             if system_logs_level not in ["DEBUG", "INFO", "ERROR"]:
                 sys.exit("Provided system logs level is not supported. Supported levels are DEBUG, INFO and ERROR")
 
+    logging.basicConfig(format='%(levelname)s - %(asctime)s - %(message)s', level=system_logs_level)
+
     if fwt_file_path is None:
         sys.exit("Please provide the FWT file path: -f or --fwtfilepath")
 
     if fwt_spec_path is None:
         fwtParser = FwtParser()
-        print("Parsing the provided FWT file against default specification - config/spec.json"
-              "\nUse -s or --specfwt to provide a specification file")
+        logging.info("Parsing the provided FWT file against default specification - config/spec.json."
+                     "Use -s or --specfwt to provide a specification file")
     else:
         fwtParser = FwtParser(fwt_spec_path)
     delimited_file = fwtParser.fwt_to_delimited(fwt_file=fwt_file_path, delimited_file=delimited_file_path,
                                                 delimiter=delimiter)
     if delimited_file is None:
-        sys.exit("Error while converting FWT to delimited.")
+        logging.error("Error while converting FWT to delimited.")
     else:
-        print("Delimited file generated:", delimited_file)
+        logging.info("Delimited file generated: %s", delimited_file)
