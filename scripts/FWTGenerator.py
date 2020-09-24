@@ -28,7 +28,7 @@ if __name__ == "__main__":
               " \n '-l' - FWTGenerator system logs level"
               " \n '-r' - set \"random\" or any value to use random data for FWT file"
               " \n Default values for the arguments will be considered when not provided.")
-        sys.exit(2)
+        sys.exit(1)
 
     for opt, arg in opts:
         if opt in ('-h', '--help'):
@@ -37,7 +37,7 @@ if __name__ == "__main__":
                   '\n -n <number_of_records> \\'
                   '\n -r <use_random_values> \\'
                   '\n -l <system_logs_level>')
-            sys.exit(2)
+            sys.exit(1)
         elif opt in ('-s', '--specfwt'):
             fwt_spec_path = arg
         elif opt in ('-f', '--fwtfilepath'):

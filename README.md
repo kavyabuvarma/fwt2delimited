@@ -87,3 +87,7 @@ To check the generated FWT and delimited files in the container, execute
 2. Add more validation checks of specification file
 3. Support additional interfaces apart from file
 4. Refactor the test suite
+
+#### Gotcha
+The generated FWT file displays some characters in a skewed manner due to the difference in encoding - FWT file would be in "windows-1252" format. 
+Check the generated delimited file, which would be in "utf-8" format, to validate the results.

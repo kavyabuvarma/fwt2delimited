@@ -24,7 +24,7 @@ if __name__ == "__main__":
               " \n '-d' - delimiter to be used"
               " \n '-l' - FWTParser system logs level"
               " \n Default values will be considered for the optional arguments if not provided.")
-        sys.exit(2)
+        sys.exit(1)
 
     for opt, arg in opts:
         if opt in ('-h', '--help'):
@@ -33,7 +33,7 @@ if __name__ == "__main__":
                   '\n -o <path_to_delimited_file> \\'
                   '\n -d <delimiter> \\'
                   '\n -l <system_logs_level>')
-            sys.exit(2)
+            sys.exit(1)
         elif opt in ('-s', '--specfwt'):
             fwt_spec_path = arg
         elif opt in ('-f', '--fwtfilepath'):
@@ -48,6 +48,15 @@ if __name__ == "__main__":
             system_logs_level = arg.upper()
             if system_logs_level not in ["DEBUG", "INFO", "ERROR"]:
                 sys.exit("Provided system logs level is not supported. Supported levels are DEBUG, INFO and ERROR")
+
+    if fwt_file_path is None:
+        print("Error starting FWT Parser, missing MANDATORY arguments. The arguments supported are:"
+              " \n '-s' - path to the FWT specification file"
+              " \n '-f' - path to the FWT file - MANDATORY"
+              " \n '-o' - path to the delimited file"
+              " \n '-d' - delimiter to be used"
+              " \n '-l' - FWTParser system logs level"
+              " \n Default values will be considered for the optional arguments if not provided.")
 
     logging.basicConfig(format='%(levelname)s - %(asctime)s - %(message)s', level=system_logs_level)
 
