@@ -83,6 +83,7 @@ To check the generated FWT and delimited files in the container, execute
 ```
 
 ### Improvements
-1. Add more validation checks of specification file
-2. Support additional interfaces apart from file
-3. Refactor the test suite
+1. Make it available as a module on PyPI
+2. Add more validation checks of specification file
+3. Support additional interfaces apart from file
+4. Refactor the test suite
