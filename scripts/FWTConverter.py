@@ -28,8 +28,11 @@ if __name__ == "__main__":
 
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            print('FWTParser.py -s <path_to_fwt_spec_file> -f <path_to_fwt_file> -o <path_to_delimited_file> '
-                  '-d <delimiter> -l <system_logs_level>')
+            print('scripts/FWTParser.py -s <path_to_fwt_spec_file> \\'
+                  '-f <path_to_fwt_file> \\'
+                  '-o <path_to_delimited_file> \\'
+                  '-d <delimiter> \\'
+                  '-l <system_logs_level>')
             sys.exit(2)
         elif opt in ('-s', '--specfwt'):
             fwt_spec_path = arg

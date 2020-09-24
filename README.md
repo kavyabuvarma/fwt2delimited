@@ -1,20 +1,27 @@
 # fwt2delimited
-Transform Fixed Width Text to Delimited
+Convert Fixed Width Text to Delimited
 
-### Getting started
+This application converts a fixed width text (FWT) file to a delimited file according to a specification.
+Specification - a JSON object that specifies the list of column names, their lengths and encoding methods. Sample - fwt2delimited/config/spec.json.
+This application can be used to 
+(i) generate an FWT file 
+(ii) convert an FWT file to delimited file
 
-Package available here: https://github.com/kavyabuvarma/fwt2delimited
+#### Assumptions
+1. The values for the keys "FixedWidthEncoding" and "DelimitedEncoding" will be valid Python 3 Codecs
 
-Unzip the bundle and navigate to the scripts directory: fwt2delimited/scripts
+### Run
 
-Add the bundle directory path to the "PYTHONPATH" environment variable
+#### Setup :
 
-### Executing the script
+1. Ensure Python 3 is installed
+2. Ensure application path is added to the environment variable "PYTHONPATH"
+3. Navigate to application directory - fwt2delimited
 
-##### 1. Generate a fixed width file using a FWT specification file
+##### 1. Generate a fixed width text file
 
 ```
-python FWTGenerator.py \
+python scripts/FWTGenerator.py \
        -s path_to_fwt_spec_file \
        -f path_to_output_fwt_file \
        -n number_of_records \
@@ -27,13 +34,13 @@ python FWTGenerator.py \
     2. **path_to_output_fwt_file** - fwt_file.txt in the current directory
     3. **number_of_records** - 20
     4. **logs_level** - INFO
-    5. **use_random_values** - False
+    5. **use_random_values** - False, uses a sample data set to generate FWT - values from fwt2delimited/config/sample_values.json
 - To get help, run **`FWTGenerator.py -h`**
 
 ##### 2. Convert a fixed width file to a delimited file using a FWT specification file
 
 ```
-python FWTConverter.py \
+python scripts/FWTConverter.py \
        -s path_to_fwt_spec_file \
        -f path_to_fwt_file \
        -o path_to_output_delimited_file \
@@ -48,3 +55,15 @@ python FWTConverter.py \
     3. **delimiter** - ","
     4. **logs_level** - INFO
 - To get help, run **`FWTConverter.py -h`**
+
+### Docker
+
+To run via Docker, navigate to the application directory and execute
+```
+ docker build -t fwt2delimited .
+
+ docker run fwt2delimited
+```
+
+### Possible improvements
+1. 

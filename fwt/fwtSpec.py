@@ -26,5 +26,5 @@ class FwtSpec:
         except AttributeError:
             logging.error("Invalid config param, expected : File Pointer.")
         except (KeyError, ValueError) as e:
-            logging.error("Invalid config specification content.")
+            logging.error("Invalid config specification.")
             logging.exception("Exception:", exc_info=True)
