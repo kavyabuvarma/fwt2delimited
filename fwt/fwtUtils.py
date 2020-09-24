@@ -119,11 +119,11 @@ class FwtParser:
             records = f.read().split("\n")
             header = str(records[0].replace(' ', '').strip())
             col_names = str(''.join(self.spec.column_names).strip())
-            if header != col_names:
+            if header == col_names or col_names in header:
+                records_nonempty = (record for record in records if len(record) != 0)
+            else:
                 logging.error("Invalid file. FWT does not match the specification, please check the column names.")
                 return
-            else:
-                records_nonempty = (record for record in records if len(record) != 0)
         except TypeError:
             logging.error("Error while reading FWT file.")
             logging.exception("message", execInfo=True)

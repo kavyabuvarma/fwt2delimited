@@ -29,19 +29,21 @@ if __name__ == "__main__":
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             print('scripts/FWTParser.py -s <path_to_fwt_spec_file> \\'
-                  '-f <path_to_fwt_file> \\'
-                  '-o <path_to_delimited_file> \\'
-                  '-d <delimiter> \\'
-                  '-l <system_logs_level>')
+                  '\n -f <path_to_fwt_file> \\'
+                  '\n -o <path_to_delimited_file> \\'
+                  '\n -d <delimiter> \\'
+                  '\n -l <system_logs_level>')
             sys.exit(2)
         elif opt in ('-s', '--specfwt'):
             fwt_spec_path = arg
         elif opt in ('-f', '--fwtfilepath'):
+            if fwt_file_path is None:
+                sys.exit("Please provide the mandatory param FWT file path: -f or --fwtfilepath")
             fwt_file_path = arg
         elif opt in ('-o', '--delimitedfilepath'):
             delimited_file_path = arg
         elif opt in ('-d', '--delimiter'):
-            delimited_file_path = arg
+            delimiter = str(arg)
         elif opt in ('-l', '--loglevel'):
             system_logs_level = arg.upper()
             if system_logs_level not in ["DEBUG", "INFO", "ERROR"]:
@@ -49,13 +51,10 @@ if __name__ == "__main__":
 
     logging.basicConfig(format='%(levelname)s - %(asctime)s - %(message)s', level=system_logs_level)
 
-    if fwt_file_path is None:
-        sys.exit("Please provide the FWT file path: -f or --fwtfilepath")
-
     if fwt_spec_path is None:
         fwtParser = FwtParser()
         logging.info("Parsing the provided FWT file against default specification - config/spec.json."
-                     "Use -s or --specfwt to provide a specification file")
+                     " Use -s or --specfwt to provide a specification file")
     else:
         fwtParser = FwtParser(fwt_spec_path)
     delimited_file = fwtParser.fwt_to_delimited(fwt_file=fwt_file_path, delimited_file=delimited_file_path,

@@ -12,8 +12,11 @@ This application can be used to
 (ii) convert an FWT file to delimited file
 
 #### Assumptions
-1. The values for the keys "FixedWidthEncoding" and "DelimitedEncoding" in specification will be valid Python 3 Codecs
-
+1. The specification file is valid : 
+   - the values for the keys "FixedWidthEncoding" and "DelimitedEncoding" in specification will be valid Python 3 Codecs
+   - the number of column names and lengths are matching, no duplicate column names
+2. The FWT file with additional columns are valid - only the columns in specification are considered for conversion.
+3. A valid delimiter is used - no limitation on the value for delimiter.  
 ### Run
 
 #### Setup :
@@ -22,6 +25,7 @@ This application can be used to
 2. Ensure application path is added to the environment variable "PYTHONPATH"
 3. Navigate to application directory: fwt2delimited
 
+Note : if **`python --version`** does not show 3.X.X , please use "python3" instead of "python" in the commands below 
 ##### 1. Generate a fixed width text file
 
 ```
@@ -68,6 +72,17 @@ To run via Docker, navigate to the application directory and execute
 
  docker run fwt2delimited
 ```
+This generates an FWT file according to default spec, using sample values and converts the same to delimited file.
 
-### Possible improvements
-1. 
+To check the generated FWT and delimited files in the container, execute
+```
+ docker run -ti fwt2delimited /bin/sh
+
+ cat fwt_file.txt
+ cat delimited_file.txt
+```
+
+### Improvements
+1. Add more validation checks of specification file
+2. Support additional interfaces apart from file
+3. Refactor the test suite

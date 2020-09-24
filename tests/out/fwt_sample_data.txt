@@ -1,10 +1,10 @@
 f1   f2          f3 f4f5           f6     f7        f8           f9                  f10          
-EAT  PERTH       USDNANOT SPECIFIEDONE    NSW       0.0          NEW ZEALAND         ËÄS TU     
-EAT  PERTH       INRO NOT SPECIFIEDFIVE   ACT       0.0          UNITED ARAB EMIRATESßÌ         
-PLAY HOBART      INRB NOT SPECIFIEDFIVE   NSW       46282.67     AUSTRALIA           ßÌ         
-WALK SYDNEY      GBPM SAD          INVALIDDEF VAL   0.0          SINGAPORE           ËÄS TU     
-SLEEPPERTH       GBPL NOT SPECIFIEDTWO    SA        46282.67     NEW ZEALAND         ËÄS TU     
-EAT  PERTH       USDI NOT SPECIFIEDFIVE   NSW       3925935.12   INDIA               BLAH         
-WORK PERTH       USDNANOT SPECIFIEDINVALIDTASMANIA  46282.67     SINGAPORE           NOT SPECIFIED
-PLAY PERTH       GBPF NEUTRAL      ONE    SA        0.0          PHILIPPINES         ßÌ         
-WALK SYDNEY      GBPNASAD          TWO    TASMANIA  0.0          INDIA               BLAH         
+WALK MELBOURNE   INRNAHAPPY        TWO    TASMANIA  3925935.12   UNITED ARAB EMIRATESßÌ         
+SLEEPMELBOURNE   X  NASAD          FOUR   SA        3925935.12   AUSTRALIA           BLAH         
+WALK MELBOURNE   X  NASAD          FIVE   DEF VAL   25.67        UNITED ARAB EMIRATESßÌ         
+WORK MELBOURNE   AUDF NEUTRAL      THREE  DEF VAL   25.67        PHILIPPINES         ßÌ         
+WALK PERTH       AUDO NOT SPECIFIEDTHREE  TASMANIA  46282.67     AUSTRALIA           ËÄS TU     
+WALK SYDNEY      INRB NOT SPECIFIEDFOUR   ACT       3925935.12   UNITED ARAB EMIRATESËÄS TU     
+WORK MELBOURNE   AUDM NEUTRAL      ONE    DEF VAL   0.0          NEW ZEALAND         BLAH         
+PLAY HOBART      INRO SAD          FOUR   ACT       3925935.12   SINGAPORE           ßÌ         
+PLAY MELBOURNE   X  I NEUTRAL      FOUR   NT        25.67        AUSTRALIA           ËÄS TU     

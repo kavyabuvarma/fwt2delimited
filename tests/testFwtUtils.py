@@ -80,6 +80,27 @@ class TestFwt:
         for i in range(0, records):
             assert del_content[i].replace(' ', '').replace(',', ''), fwt_content[i].replace(' ', '')
 
+    def test_convert_fwt_additional_columns(self):
+
+        fwt_file = str("files/fwt_additional_cols.txt")
+
+        fwt_parser = FwtParser()
+        delimited_filename = fwt_parser.fwt_to_delimited(fwt_file=fwt_file)
+
+        f = open(fwt_file, encoding=fwt_parser.spec.encoding_format_fwt)
+        fwt_records = f.read().split("\n")
+        f.close()
+
+        f = open(delimited_filename, encoding=fwt_parser.spec.encoding_format_del)
+        del_records = f.read().split("\n")
+        f.close()
+
+        exp_len = sum(fwt_parser.spec.offsets_int)
+        for i in range(0, len(fwt_records)):
+            actual = str(del_records[i].replace(' ', '').replace(',', ''))
+            expected = str(fwt_records[i])[0:exp_len].replace(' ', '')
+            assert actual == expected
+
     def test_convert_invalid_file_doesnt_exist(self):
         fwt_file = str("this_file_doesnt_exist.txt")
         delim_file = str(Path(__file__).parent / "out/op1.txt")
@@ -88,20 +109,10 @@ class TestFwt:
         delimited_filename = fwt_parser.fwt_to_delimited(fwt_file, delimited_file=delim_file)
         assert (delimited_filename is None), True
 
-    def test_convert_fwt_additional_columns(self):
-
-        filepath = Path(__file__).parent / "files/fwt_additional_cols.txt"
-        delim_file = str(Path(__file__).parent / "out/op2.txt")
-
-        fwt_parser = FwtParser()
-        delimited_filename = fwt_parser.fwt_to_delimited(filepath, delimited_file=delim_file)
-
-        assert (delimited_filename is None), True
-
     def test_convert_fwt_missing_columns(self):
 
         filepath = Path(__file__).parent / "files/fwt_missing_cols.txt"
-        delim_file = str(Path(__file__).parent / "out/op3.txt")
+        delim_file = str(Path(__file__).parent / "out/op2.txt")
 
         fwt_parser = FwtParser()
         delimited_filename = fwt_parser.fwt_to_delimited(filepath, delimited_file=delim_file)
@@ -110,7 +121,7 @@ class TestFwt:
 
     def test_empty_fwt(self):
         filepath = Path(__file__).parent / "files/fwt_empty.txt"
-        delim_file = str(Path(__file__).parent / "out/op4.txt")
+        delim_file = str(Path(__file__).parent / "out/op3.txt")
 
         fwt_parser = FwtParser()
         delimited_filename = fwt_parser.fwt_to_delimited(filepath, delimited_file=delim_file)
@@ -118,7 +129,7 @@ class TestFwt:
 
     def test_invalid_cols(self):
         filepath = Path(__file__).parent / "files/fwt_invalid_cols.txt"
-        delim_file = str(Path(__file__).parent / "out/op5.txt")
+        delim_file = str(Path(__file__).parent / "out/op4.txt")
 
         fwt_parser = FwtParser()
         delimited_filename = fwt_parser.fwt_to_delimited(filepath, delimited_file=delim_file)
