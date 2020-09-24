@@ -57,7 +57,8 @@ if __name__ == "__main__":
               " \n '-d' - delimiter to be used"
               " \n '-l' - FWTParser system logs level"
               " \n Default values will be considered for the optional arguments if not provided.")
-
+        sys.exit(1)
+        
     logging.basicConfig(format='%(levelname)s - %(asctime)s - %(message)s', level=system_logs_level)
 
     if fwt_spec_path is None:

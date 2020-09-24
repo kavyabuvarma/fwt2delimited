@@ -33,8 +33,8 @@ python scripts/FWTGenerator.py \
        -s path_to_spec_file \
        -f path_to_fwt_file \
        -n number_of_records \
-       -l logs_level \
-       -r use_random_values \              
+       -r use_random_values \
+       -l logs_level                     
 ```
 - The parameters are all optional.
 - The default values are:
@@ -52,8 +52,8 @@ python scripts/FWTConverter.py \
        -s path_to_spec_file \
        -f path_to_fwt_file \
        -o path_to_delimited_file \
-       -d delimiter
-       -l logs_level \         
+       -d delimiter \
+       -l logs_level         
 ```
             
 - The parameters except for **path_to_fwt_file** are all optional.
