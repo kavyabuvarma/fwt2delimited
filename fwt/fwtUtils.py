@@ -114,7 +114,7 @@ class FwtParser:
 
     def get_records_fwt_file(self, fwt_file):
         try:
-            encoding_format = self.spec.encoding_format_fwt
+            encoding_format = self.spec.encoding_format_del
             f = codecs.open(fwt_file, "r", encoding_format)
             records = f.read().split("\n")
             header = str(records[0].replace(' ', '').strip())

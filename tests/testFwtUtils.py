@@ -73,7 +73,7 @@ class TestFwt:
         f.close()
         assert len(del_content), records
 
-        f = open(fwt_filename)
+        f = open(fwt_filename, encoding=fwt_parser.spec.encoding_format_del)
         fwt_content = f.read().split("\n")
         f.close()
 
@@ -87,7 +87,7 @@ class TestFwt:
         fwt_parser = FwtParser()
         delimited_filename = fwt_parser.fwt_to_delimited(fwt_file=fwt_file)
 
-        f = open(fwt_file, encoding=fwt_parser.spec.encoding_format_fwt)
+        f = open(fwt_file, encoding=fwt_parser.spec.encoding_format_del)
         fwt_records = f.read().split("\n")
         f.close()
 
